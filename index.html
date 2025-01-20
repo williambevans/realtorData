@@ -4,6 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top 100 SaaS Companies Redistributing MLS Data</title>
+    async function showVisitorInfo() {
+            try {
+                // Fetch visitor information using an IP geolocation API
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+
+                // Extract relevant information
+                const ip = data.ip || 'Unavailable';
+                const city = data.city || 'Unavailable';
+                const state = data.region || 'Unavailable';
+                const zip = data.postal || 'Unavailable';
+
+                // Create the message
+                const message = `
+                    Your Information:
+                    IP Address: ${ip}
+                    City: ${city}
+                    State: ${state}
+                    ZIP Code: ${zip}
+                `;
+
+                // Display as a popup window
+                alert(message);
+            } catch (error) {
+                console.error('Error fetching visitor information:', error);
+                alert('Could not retrieve visitor information.');
+            }
+        }
+
+        // Trigger the function on page load
+        window.onload = showVisitorInfo;
     <style>
         body {
             font-family: "Courier New", Courier, monospace;
